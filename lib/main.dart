@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:news_app/bloc_observer.dart';
+import 'package:news_app/layout/news_app/cubit/news_cubit.dart';
 import 'package:news_app/layout/news_app/news_layout.dart';
-
+import 'package:news_app/shared/network/remote/dio_helper.dart';
+import 'package:bloc/bloc.dart';
 void main() {
+  DioHelper.init();
+  BlocOverrides.runZoned(
+    () {
+      NewsCubit();
+      // Use blocs...
+    },
+    blocObserver: MyBlocObserver(),
+  );
+   
+
   runApp(const MyApp());
 }
 
@@ -15,6 +28,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: Colors.black,
+        ),
         scaffoldBackgroundColor: Colors.white,
         appBarTheme: AppBarTheme(
           titleTextStyle: TextStyle(
@@ -22,7 +38,9 @@ class MyApp extends StatelessWidget {
             fontSize: 20.0,
             fontWeight: FontWeight.bold,
           ),
-          iconTheme: IconThemeData(color: Colors.black,),
+          iconTheme: IconThemeData(
+            color: Colors.black,
+          ),
           backwardsCompatibility: false,
           systemOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: Colors.white,
