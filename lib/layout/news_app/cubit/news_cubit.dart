@@ -32,16 +32,13 @@ class NewsCubit extends Cubit<NewsState> {
       ),
       label: 'science',
     ),
-    BottomNavigationBarItem(
-      icon: Icon(Icons.settings),
-      label: 'settings',
-    ),
+  
   ];
   List<Widget> screens = [
     BusinessScreen(),
     SportsScreen(),
     ScienceScreen(),
-    SettingsScreen(),
+    
   ];
 
   void changeBottomNavBar(int index) {
@@ -121,5 +118,12 @@ class NewsCubit extends Cubit<NewsState> {
     }else{
        emit(NewsGetSportsSuccessState());
     }
+  }
+
+  bool isDark = false;
+
+  void changeAppMode (){
+    isDark = !isDark;
+    emit(NewsAppModeState());
   }
 }

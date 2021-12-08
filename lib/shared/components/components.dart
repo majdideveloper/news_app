@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 
-Widget buildArticleItem (article ) => Padding(
+Widget buildArticleItem (article,context ) => Padding(
       padding: const EdgeInsets.all(20.0),
       child: Row(
         children: <Widget>[
@@ -32,10 +32,7 @@ Widget buildArticleItem (article ) => Padding(
                       '${article['title']}',
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.w700,
-                      ),
+                      style:Theme.of(context).textTheme.bodyText1,
                     ),
                   ),
                   Text(
@@ -57,7 +54,7 @@ Widget buildArticleItem (article ) => Padding(
     Widget articleBuilder (list ) =>list.length>0
             ? ListView.separated(
                 physics: BouncingScrollPhysics(),
-                itemBuilder: (context, index) => buildArticleItem(list[index]),
+                itemBuilder: (context, index) => buildArticleItem(list[index],context),
                 separatorBuilder: (context, index) => Container(
                       height: 1.0,
                       color: Colors.black,
